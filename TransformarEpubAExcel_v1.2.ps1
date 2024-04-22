@@ -1,9 +1,9 @@
 # Verificar si el script se esta ejecutando como administrador
-# if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-#    # Solicitar elevacion de permisos ejecutando el script nuevamente con privilegios elevados
-#    Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$PSCommandPath`"" -Verb RunAs
-#    exit
-#}
+ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    # Solicitar elevacion de permisos ejecutando el script nuevamente con privilegios elevados
+    Start-Process -FilePath "powershell.exe" -ArgumentList "-File `"$PSCommandPath`"" -Verb RunAs
+   exit
+}
 
 # Verifica si el modulo ImportExcel esta instalado
 if (-not (Get-Module -Name ImportExcel -ListAvailable)) {
@@ -85,7 +85,7 @@ $styleDirectoryName = $styleFiles[0].Directory.Name
 # Construir la ruta de acceso a la carpeta que contiene las imagenes
 $styleFolderPath = Join-Path -Path $tempFolder -ChildPath $styleDirectoryName
 
-# Ruta de la carpeta de salida para imágenes
+# Ruta de la carpeta de salida para imÃ¡genes
 $outputStylePath = Join-Path $resultFolder "style"
 
 # Verifica si la carpeta de salida existe
@@ -155,7 +155,7 @@ $excelPath = Join-Path $resultFolder ($epubName  + "_output.xlsx")
 $package = New-Object OfficeOpenXml.ExcelPackage
 $worksheet = $package.Workbook.Worksheets.Add("$epubName")
 
-# A�adir encabezados para identificar la etiqueta, la clase, la ruta de las imagenes y el contenido
+# Añadir encabezados para identificar la etiqueta, la clase, la ruta de las imagenes y el contenido
 $worksheet.Cells[1, 1].Value = "tag"
 $worksheet.Cells[1, 2].Value = "class"
 $worksheet.Cells[1, 3].Value = "src"
@@ -203,8 +203,8 @@ if ($xhtmlFile -eq $null) {
         # Reemplazar la referencia a la entidad "&nbsp;" con un espacio en blanco
         $xhtmlContent = $xhtmlContent -replace '&nbsp;', ' '
 
-        # Reemplazar la referencia a la entidad "&mdash;" con un gui�n largo
-        $xhtmlContent = $xhtmlContent -replace '&mdash;', '�'
+        # Reemplazar la referencia a la entidad "&mdash;" con un guión largo
+        $xhtmlContent = $xhtmlContent -replace '&mdash;', '—'
 
         # Reemplazar la referencia a la entidad "&crarr;" con un retorno de carro
         $xhtmlContent = $xhtmlContent -replace '&crarr;', [char]13
